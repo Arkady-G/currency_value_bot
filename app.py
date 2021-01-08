@@ -27,9 +27,9 @@ def converting(message: telebot.types.Message):
         values_carrency = message.text.split(' ')
 
         if len(values_carrency) > 3:
-            raise ConvertionException('Слишком много параметров')
+            raise ConvertionException('Слишком много параметров\n/help')
         if len(values_carrency) < 3:
-            raise ConvertionException('Недостаточно параметров')
+            raise ConvertionException('Недостаточно параметров\n/help')
 
         base, quote, amount = values_carrency
         total_base = CurrencyConverter.get_price(base, quote, amount)
