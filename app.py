@@ -32,14 +32,15 @@ def converting(message: telebot.types.Message):
             raise ConvertionException('Недостаточно параметров\n/help')
 
         base, quote, amount = values_carrency
-        total_base = CurrencyConverter.get_price(base, quote, amount)
+        total_base = round(CurrencyConverter.get_price(base, quote, amount), 5)
+        total_quote = round(total_base * float(amount), 2)
     except ConvertionException as e:
         bot.reply_to(message, f'Ошибка пользователя\n{e}')
 
     except Exception as e:
         bot.reply_to(message, f'Не удалось обработать команду\n{e}')
     else:
-        text = f'Курс конвертации 1 {base} = {round(total_base, 5)} {quote}\n За {amount} {keys[base]} Вы получаете {round(total_base * float(amount), 2)} {keys[quote]} '
+        text = f'Курс конвертации 1 {base} = {total_base} {quote}\n За {amount} {keys[base]} Вы получаете {total_quote} {keys[quote]} '
         bot.send_message(message.chat.id, text)
 
 
