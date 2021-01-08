@@ -14,6 +14,9 @@ class CurrencyConverter:
         if quote == base:
             raise ConvertionException('Невозможно конвертировать одинаковые валюты')
 
+        if float(amount) <= 0:
+            raise ConvertionException('Невозможно конвертировать 0 или отрицательное количество\n/help')
+
         try:
             quote_ticker = keys[quote]
         except KeyError:
