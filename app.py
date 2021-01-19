@@ -1,11 +1,11 @@
 import telebot
-from config import keys, TOKEN
+from config import keys, list_of_currencies, TOKEN
 from extensions import ConvertionException, CurrencyConverter
 
 bot = telebot.TeleBot(TOKEN)
 
 
-@bot.message_handler(commands=['start', 'help'])
+@bot.message_handler(commands=['start', 'Start', 'help', 'Help'])
 def bot_help(message: telebot.types.Message):
     text = 'Чтобы начать работу введите команду боту в следующем формате: \n<имя валюты><в какую валюту ' \
            'перевести><количество переводимой валюты>\nНапример:  евро рубль 1000\nУвидеть список всех доступных ' \
@@ -13,10 +13,10 @@ def bot_help(message: telebot.types.Message):
     bot.reply_to(message, text)
 
 
-@bot.message_handler(commands=['values'])
+@bot.message_handler(commands=['values', 'Values'])
 def values(message: telebot.types.Message):
     text = 'Доступные валюты:'
-    for key in keys.keys():
+    for key in list_of_currencies.keys():
         text = '\n'.join((text, key,))
     bot.reply_to(message, text)
 
