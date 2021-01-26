@@ -7,9 +7,9 @@ bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=['start', 'Start', 'help', 'Help'])
 def bot_help(message: telebot.types.Message):
-    text = 'Чтобы начать работу введите команду боту в следующем формате: \n<имя валюты><в какую валюту ' \
-           'перевести><количество переводимой валюты>\nНапример:  евро рубль 1000\nУвидеть список всех доступных ' \
-           'валют: /values '
+    text = f'Привет, {message.chat.username}! Чтобы начать работу введите команду боту одной строкой в следующем ' \
+           f'формате: \n<имя валюты> <в какую валюту перевести> <количество переводимой валюты>\nНапример: евро рубль ' \
+           f'1000\nУвидеть список всех доступных валют: /values '
     bot.reply_to(message, text)
 
 
@@ -44,4 +44,4 @@ def converting(message: telebot.types.Message):
         bot.send_message(message.chat.id, text)
 
 
-bot.polling()
+bot.polling(none_stop=True)
